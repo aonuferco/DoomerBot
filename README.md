@@ -20,7 +20,7 @@ List of commands and descriptions presented below.
 * [Useless Fact](#Useless-Fact)
 * [Useless Web](#Useless-Web)
 
-### Utilities
+### utilities
 
 * [Ping](#Ping)
 * [Poll](#Poll)
