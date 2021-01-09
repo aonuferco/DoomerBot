@@ -38,7 +38,7 @@ Command format: **!8ball <your_question>**
 #### Gif
 
 Get a gif from giphy.  
-Command format: **!gif <tag>**
+Command format: **!gif** **<**tag**>**
 
 #### Random Hug
 
@@ -88,7 +88,7 @@ Command format: **!poll <question>, <choice_1>, <choice_2>, <choice_3>, ... <cho
 #### Weather
 
 Get the current weather from the city you want. To get a specific city, enter city name and a [two-letter country code (ISO 3166-1 alpha-2)](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), separated by a comma.  
-Command format: _default:_ **!weather <city>** _specific:_ **!weather <city>,<country_code>**
+Command format: _default:_ **!weather** **<**city**>** _specific:_ **!weather** **<**city**>****,<country_code>**
 
 #### Wolfram Alpha
 
