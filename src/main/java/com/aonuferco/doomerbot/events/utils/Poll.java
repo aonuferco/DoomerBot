@@ -25,17 +25,8 @@ public class Poll implements EventAbstraction {
     private final StringBuilder description = new StringBuilder();
     /* Map of emojis to use for Discord Embed description build. */
     private final Map<Integer, String> numMap = Stream.of(
-            new Object[][]{
-                    {1, ":one:"},
-                    {2, ":two:"},
-                    {3, ":three:"},
-                    {4, ":four:"},
-                    {5, ":five:"},
-                    {6, ":six:"},
-                    {7, ":seven:"},
-                    {8, ":eight:"},
-                    {9, ":nine:"},
-                    {10, ":keycap_ten:"}
+            new Object[][]{ {1, "1️⃣"}, {2, "2️⃣"}, {3, "3️⃣"}, {4, "4️⃣"}, {5, "5️⃣"},
+                            {6, "6️⃣"}, {7, "7️⃣"}, {8, "8️⃣"}, {9, "9️⃣"}, {10, "🔟"}
             }).collect(Collectors.toMap(data -> (Integer) data[0], data -> (String) data[1]));
 
     @Override
@@ -43,9 +34,10 @@ public class Poll implements EventAbstraction {
         logger.info("/{} command called by user {}", event.getName(),
                 event.getMember().getUser().getAsTag().toUpperCase());
         List<OptionMapping> choicesArray = event.getOptions();
+        int choicesArraySize = choicesArray.size();
 
         /* Populate description with emojis for choices. */
-        for (int i = 1; i < choicesArray.size(); i++) {
+        for (int i = 1; i < choicesArraySize; i++) {
             description.append(numMap.get(i))
                     .append(" ").append(choicesArray.get(i).getAsString().trim())
                     .append("\n");
@@ -58,15 +50,8 @@ public class Poll implements EventAbstraction {
         event.reply("Your poll was sent!").setEphemeral(true).queue();
         /* Sends a message to the channel and auto-reacts, depending on the choice amount. */
         event.getChannel().sendMessageEmbeds(builder.build()).queue(message -> {
-            if (choicesArray.size() > 10) {
-                for (int i = 1; i < 10; i++) {
-                    message.addReaction(Emoji.fromUnicode("U+003" + i + " U+20E3")).queue();
-                }
-                message.addReaction(Emoji.fromUnicode("U+1F51F")).queue();
-            } else {
-                for (int i = 1; i < choicesArray.size(); i++) {
-                    message.addReaction(Emoji.fromUnicode("U+003" + i + " U+20E3")).queue();
-                }
+            for (int i = 1; i < choicesArraySize; i++) {
+                message.addReaction(Emoji.fromFormatted(numMap.get(i))).queue();
             }
         });
         description.setLength(0);
