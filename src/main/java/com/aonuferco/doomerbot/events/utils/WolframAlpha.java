@@ -14,7 +14,18 @@ import org.slf4j.Logger;
  * sent to the WolframAlpha API.
  */
 public class WolframAlpha implements EventAbstraction {
+    private static WolframAlpha wolframAlphaInstance;
     private final Logger logger = JDALogger.getLog(WolframAlpha.class);
+
+    private WolframAlpha() {
+    }
+
+    public static WolframAlpha getWolframAlphaInstance() {
+        if (wolframAlphaInstance == null)
+            wolframAlphaInstance = new WolframAlpha();
+
+        return wolframAlphaInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

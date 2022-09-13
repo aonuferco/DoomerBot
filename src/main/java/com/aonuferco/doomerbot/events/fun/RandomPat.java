@@ -20,7 +20,18 @@ import java.util.Map;
  * using Some-Random-API.
  */
 public class RandomPat implements EventAbstraction {
+    private static RandomPat randomPatInstance;
     private final Logger logger = JDALogger.getLog(RandomPat.class);
+
+    private RandomPat() {
+    }
+
+    public static RandomPat getRandomPatInstance() {
+        if (randomPatInstance == null)
+            randomPatInstance = new RandomPat();
+
+        return randomPatInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

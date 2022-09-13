@@ -20,7 +20,18 @@ import java.net.URL;
  * returns the most relevant search result video.
  */
 public class YTSearch implements EventAbstraction {
+    private static YTSearch ytSearchInstance;
     private final Logger logger = JDALogger.getLog(YTSearch.class);
+
+    private YTSearch() {
+    }
+
+    public static YTSearch getYtSearchInstance() {
+        if (ytSearchInstance == null)
+            ytSearchInstance = new YTSearch();
+
+        return ytSearchInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

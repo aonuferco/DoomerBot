@@ -14,6 +14,7 @@ import java.util.Random;
  * pool of fun websites.
  */
 public class UselessWeb implements EventAbstraction {
+    private static UselessWeb uselessWebInstance;
     private final Logger logger = JDALogger.getLog(UselessWeb.class);
     private final String[] websites = new String[]{
             "http://heeeeeeeey.com/",
@@ -106,6 +107,16 @@ public class UselessWeb implements EventAbstraction {
             "http://kolor.moro.es/",
             "http://foaas.com/"
     };
+
+    private UselessWeb() {
+    }
+
+    public static UselessWeb getUselessWebInstance() {
+        if (uselessWebInstance == null)
+            uselessWebInstance = new UselessWeb();
+
+        return uselessWebInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

@@ -20,14 +20,25 @@ import java.util.stream.Stream;
  * selected by emoji reactions.
  */
 public class Poll implements EventAbstraction {
+    private static Poll pollInstance;
     private final Logger logger = JDALogger.getLog(Poll.class);
     /* Builder for Discord Embed description. */
     private final StringBuilder description = new StringBuilder();
     /* Map of emojis to use for Discord Embed description build. */
     private final Map<Integer, String> numMap = Stream.of(
-            new Object[][]{ {1, "1️⃣"}, {2, "2️⃣"}, {3, "3️⃣"}, {4, "4️⃣"}, {5, "5️⃣"},
-                            {6, "6️⃣"}, {7, "7️⃣"}, {8, "8️⃣"}, {9, "9️⃣"}, {10, "🔟"}
+            new Object[][]{{1, "1️⃣"}, {2, "2️⃣"}, {3, "3️⃣"}, {4, "4️⃣"}, {5, "5️⃣"},
+                    {6, "6️⃣"}, {7, "7️⃣"}, {8, "8️⃣"}, {9, "9️⃣"}, {10, "🔟"}
             }).collect(Collectors.toMap(data -> (Integer) data[0], data -> (String) data[1]));
+
+    private Poll() {
+    }
+
+    public static Poll getPollInstance() {
+        if (pollInstance == null)
+            pollInstance = new Poll();
+
+        return pollInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

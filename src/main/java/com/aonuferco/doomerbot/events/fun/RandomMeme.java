@@ -20,8 +20,19 @@ import java.util.Map;
  * using Meme API.
  */
 public class RandomMeme implements EventAbstraction {
+    private static RandomMeme randomMemeInstance;
     private final Logger logger = JDALogger.getLog(RandomMeme.class);
     private String title, image, subreddit, src;
+
+    private RandomMeme() {
+    }
+
+    public static RandomMeme getRandomMemeInstance() {
+        if (randomMemeInstance == null)
+            randomMemeInstance = new RandomMeme();
+
+        return randomMemeInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

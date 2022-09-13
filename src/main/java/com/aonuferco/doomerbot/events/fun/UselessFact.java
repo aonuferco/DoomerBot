@@ -18,7 +18,18 @@ import java.util.Map;
  * Returns a random useless fact.
  */
 public class UselessFact implements EventAbstraction {
+    private static UselessFact uselessFactInstance;
     private final Logger logger = JDALogger.getLog(UselessFact.class);
+
+    private UselessFact() {
+    }
+
+    public static UselessFact getUselessFactInstance() {
+        if (uselessFactInstance == null)
+            uselessFactInstance = new UselessFact();
+
+        return uselessFactInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

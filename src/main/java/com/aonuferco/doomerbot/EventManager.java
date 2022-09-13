@@ -2,10 +2,11 @@ package com.aonuferco.doomerbot;
 
 import com.aonuferco.doomerbot.events.EventAbstraction;
 import com.aonuferco.doomerbot.events.fun.*;
+import com.aonuferco.doomerbot.events.help.HelperMain;
 import com.aonuferco.doomerbot.events.utils.*;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,26 +20,27 @@ import java.util.Map;
  */
 public class EventManager {
     private static final Map<String, EventAbstraction> events;
-    private static final List<CommandData> commandData;
+    private static final List<SlashCommandData> commandData;
 
     static {
         events = new HashMap<>();
         commandData = new ArrayList<>();
 
-        events.put("ping", new Ping());
-        events.put("hug", new RandomHug());
-        events.put("meme", new RandomMeme());
-        events.put("pat", new RandomPat());
-        events.put("wink", new RandomWink());
-        events.put("rate", new Rater());
-        events.put("uselessfact", new UselessFact());
-        events.put("uselessweb", new UselessWeb());
+        events.put("ping", Ping.getPingInstance());
+        events.put("hug", RandomHug.getRandomHugInstance());
+        events.put("meme", RandomMeme.getRandomMemeInstance());
+        events.put("pat", RandomPat.getRandomPatInstance());
+        events.put("wink", RandomWink.getRandomWinkInstance());
+        events.put("rate", Rater.getRaterInstance());
+        events.put("uselessfact", UselessFact.getUselessFactInstance());
+        events.put("uselessweb", UselessWeb.getUselessWebInstance());
 
-        events.put("yt", new YTSearch());
-        events.put("weather", new Weather());
-        events.put("wolfram", new WolframAlpha());
-        events.put("8ball", new MagicBall());
-        events.put("poll", new Poll());
+        events.put("yt", YTSearch.getYtSearchInstance());
+        events.put("weather", Weather.getWeatherInstance());
+        events.put("wolfram", WolframAlpha.getWolframAlphaInstance());
+        events.put("8ball", MagicBall.getMagicBallInstance());
+        events.put("poll", Poll.getPollInstance());
+        events.put("help", HelperMain.getHelperMainInstance());
 
         commandData.add(Commands.slash("ping", "ping network test"));
         commandData.add(Commands.slash("hug", "random hug gif"));
@@ -57,6 +59,8 @@ public class EventManager {
                 .addOption(OptionType.STRING, "query", "e.g. Einstein curve", true));
         commandData.add(Commands.slash("8ball", "ask the ball a question")
                 .addOption(OptionType.STRING, "query", "anything you want to ask", true));
+        commandData.add(Commands.slash("help", "DoomerBot commands info")
+                .addOption(OptionType.STRING, "command", "for detailed command view", false));
         commandData.add(Commands.slash("poll", "poll with up to 10 choices")
                 .addOption(OptionType.STRING, "question", "poll question", true)
                 .addOption(OptionType.STRING, "1st", "first choice", true)
@@ -75,7 +79,7 @@ public class EventManager {
         return events;
     }
 
-    public static List<CommandData> getCommandData() {
+    public static List<SlashCommandData> getCommandData() {
         return commandData;
     }
 }
