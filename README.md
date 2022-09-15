@@ -25,7 +25,7 @@ List of commands and descriptions presented below.
 * [Ping](#Ping)
 * [Poll](#Poll)
 * [Weather](#Weather)
-* [Wolfram Aplha](#Wolfram-Alpha)
+* [Wolfram Alpha](#Wolfram-Alpha)
 * [Youtube Search](#Youtube-Search)
 
 ### Command Descriptions
