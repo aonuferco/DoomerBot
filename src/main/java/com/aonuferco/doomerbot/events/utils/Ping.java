@@ -13,7 +13,18 @@ import java.time.temporal.ChronoField;
  * Network response check.
  */
 public class Ping implements EventAbstraction {
+    private static Ping pingInstance;
     private final Logger logger = JDALogger.getLog(Ping.class);
+
+    private Ping() {
+    }
+
+    public static Ping getPingInstance() {
+        if (pingInstance == null)
+            pingInstance = new Ping();
+
+        return pingInstance;
+    }
 
     @Override
     public void execute(@Nonnull SlashCommandInteractionEvent event) {

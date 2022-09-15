@@ -20,7 +20,18 @@ import java.util.Map;
  * using Some-Random-API.
  */
 public class RandomHug implements EventAbstraction {
+    private static RandomHug randomHugInstance;
     private final Logger logger = JDALogger.getLog(RandomHug.class);
+
+    private RandomHug() {
+    }
+
+    public static RandomHug getRandomHugInstance() {
+        if (randomHugInstance == null)
+            randomHugInstance = new RandomHug();
+
+        return randomHugInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

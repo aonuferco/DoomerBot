@@ -22,9 +22,20 @@ import java.net.URL;
  * using OpenWeather API.
  */
 public class Weather implements EventAbstraction {
+    private static Weather weatherInstance;
     private final Logger logger = JDALogger.getLog(Weather.class);
     private String description, city, country, icon;
     private int statusCode, temp, humidity, wind;
+
+    private Weather() {
+    }
+
+    public static Weather getWeatherInstance() {
+        if (weatherInstance == null)
+            weatherInstance = new Weather();
+
+        return weatherInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {
@@ -93,6 +104,5 @@ public class Weather implements EventAbstraction {
         } catch (FileNotFoundException e) {
             statusCode = 404;
         }
-
     }
 }

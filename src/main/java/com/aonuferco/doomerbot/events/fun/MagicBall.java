@@ -20,7 +20,18 @@ import java.net.URLConnection;
  * question, using Eight Ball Delegator API.
  */
 public class MagicBall implements EventAbstraction {
+    private static MagicBall magicBallInstance;
     private final Logger logger = JDALogger.getLog(MagicBall.class);
+
+    private MagicBall() {
+    }
+
+    public static MagicBall getMagicBallInstance() {
+        if (magicBallInstance == null)
+            magicBallInstance = new MagicBall();
+
+        return magicBallInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

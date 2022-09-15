@@ -20,7 +20,18 @@ import java.util.Map;
  * using Some-Random-API.
  */
 public class RandomWink implements EventAbstraction {
+    private static RandomWink randomWinkInstance;
     private final Logger logger = JDALogger.getLog(RandomWink.class);
+
+    private RandomWink() {
+    }
+
+    public static RandomWink getRandomWinkInstance() {
+        if (randomWinkInstance == null)
+            randomWinkInstance = new RandomWink();
+
+        return randomWinkInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {

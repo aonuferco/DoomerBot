@@ -15,7 +15,18 @@ import java.util.Random;
  * attributed to your look.
  */
 public class Rater implements EventAbstraction {
+    private static Rater raterInstance;
     private final Logger logger = JDALogger.getLog(Rater.class);
+
+    private Rater() {
+    }
+
+    public static Rater getRaterInstance() {
+        if (raterInstance == null)
+            raterInstance = new Rater();
+
+        return raterInstance;
+    }
 
     @Override
     public void execute(@NotNull SlashCommandInteractionEvent event) {
